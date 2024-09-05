@@ -34,5 +34,4 @@ jobs:
           bin/rails db:seed
 
       - name: Run tests
-        run:
-          bin/rails test
+        run: bin/rails test
