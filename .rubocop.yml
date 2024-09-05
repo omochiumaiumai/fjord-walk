@@ -15,6 +15,7 @@ AllCops:
     - 'config/**/*'
     - 'test/**/*'
     - 'spec/**/*'
+    - 'vendor/**/*'
 
 Layout/IndentationWidth:
   Enabled: true
