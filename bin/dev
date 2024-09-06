@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ -f tmp/pids/server.pid ]; then
+  rm tmp/pids/server.pid
+fi
+
+# Foremanを使ってProcfile.devを実行
+exec foreman start -f Procfile.dev
