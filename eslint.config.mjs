@@ -3,7 +3,7 @@ import pluginJs from '@eslint/js'
 
 export default [
   {
-    ignores: ['vendor/**'],
+    ignores: ['.vendor/'],
     languageOptions: {
       globals: {
         ...globals.node,
