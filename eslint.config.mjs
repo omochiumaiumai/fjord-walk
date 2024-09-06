@@ -3,11 +3,12 @@ import pluginJs from '@eslint/js'
 
 export default [
   {
+    ignores: ['vendor/**'],
     languageOptions: {
       globals: {
         ...globals.node,
       },
-      sourceType: 'module',
+    sourceType: 'module',
     },
   },
 
@@ -15,7 +16,6 @@ export default [
 
   {
     files: ['**/*.js'],
-    ignores: ['vendor/**'],
     languageOptions: {
       sourceType: 'module',
     },
