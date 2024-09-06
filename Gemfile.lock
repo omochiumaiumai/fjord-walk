@@ -85,6 +85,8 @@ GEM
     childprocess (4.1.0)
     concurrent-ruby (1.3.4)
     crass (1.0.6)
+    cssbundling-rails (1.4.1)
+      railties (>= 6.0.0)
     date (3.3.4)
     erubi (1.13.0)
     ffi (1.17.0-arm64-darwin)
@@ -95,6 +97,8 @@ GEM
     jbuilder (2.12.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsbundling-rails (1.3.1)
+      railties (>= 6.0.0)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -235,7 +239,9 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  cssbundling-rails
   jbuilder (~> 2.7)
+  jsbundling-rails
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   psych (~> 3.1)

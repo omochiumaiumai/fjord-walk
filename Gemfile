@@ -28,6 +28,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'cssbundling-rails'
+gem 'jsbundling-rails'
 gem 'psych', '~> 3.1'
 
 group :development, :test do
