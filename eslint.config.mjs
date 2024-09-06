@@ -15,8 +15,9 @@ export default [
 
   {
     files: ['**/*.js'],
+    ignores: ['vendor/**'],
     languageOptions: {
-      sourceType: 'module', // ES Modulesを使用
+      sourceType: 'module',
     },
   },
 ]
