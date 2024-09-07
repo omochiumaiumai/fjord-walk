@@ -31,6 +31,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
 gem 'psych', '~> 3.1'
+gem 'dotenv-rails'
+
+gem 'omniauth-discord'
+gem 'omniauth-rails_csrf_protection'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
