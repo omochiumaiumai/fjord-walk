@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'cssbundling-rails'
+gem 'slim-rails'
 gem 'jsbundling-rails'
 gem 'psych', '~> 3.1'
 gem 'dotenv-rails'
