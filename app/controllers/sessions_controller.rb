@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in user
     end
 
-    redirect_to root_path
+    redirect_to dashboard_path(current_user.id)
   end
 
   def failure
