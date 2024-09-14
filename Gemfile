@@ -29,8 +29,15 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'cssbundling-rails'
+gem 'slim-rails'
 gem 'jsbundling-rails'
 gem 'psych', '~> 3.1'
+gem 'dotenv-rails'
+
+gem 'omniauth-discord'
+gem 'omniauth-rails_csrf_protection'
+
+gem 'simple_calendar'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

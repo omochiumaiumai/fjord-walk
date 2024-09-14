@@ -2,3 +2,4 @@ vendor/**
 **/vendor/**
 **/bundle/**
 babel.config.js
+public/packs
