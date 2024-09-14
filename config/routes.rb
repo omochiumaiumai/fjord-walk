@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/dashboard/:user_id', to: 'dashboard#show', as: 'dashboard'
   get 'auth/failure', to: redirect('/')
 
+  resources :users, only: [:show, :edit, :update ]
 end
