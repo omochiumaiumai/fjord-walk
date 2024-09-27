@@ -1,0 +1,33 @@
+# 毎週月曜日に開催されるイベント
+event_repeat_rule1:
+  event_id: 1
+  frequency: 0  # 毎週
+  day_of_the_week: 1  # 月曜日
+
+# 第1週の金曜日に開催されるイベント
+event_repeat_rule2:
+  event_id: 2
+  frequency: 1  # 第1週
+  day_of_the_week: 5  # 金曜日
+
+# 第1週と第3週の水曜日に開催されるイベント
+event_repeat_rule3:
+  event_id: 3
+  frequency: 1  # 第1週
+  day_of_the_week: 3  # 水曜日
+
+event_repeat_rule4:
+  event_id: 3
+  frequency: 3  # 第3週
+  day_of_the_week: 3  # 水曜日
+
+# 毎週月曜と金曜に開催されるイベント
+event_repeat_rule5:
+  event_id: 4
+  frequency: 0  # 毎週
+  day_of_the_week: 1  # 月曜日
+
+event_repeat_rule6:
+  event_id: 4
+  frequency: 0  # 毎週
+  day_of_the_week: 5  # 金曜日
