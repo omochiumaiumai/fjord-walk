@@ -1,14 +1,14 @@
 user1:
   name: "毎日 あゆむ"
   discord_uid: 123456789012345678
-  avatar_url: "test/fixtures/files/users/avatars/user1.png"
+  avatar_url: "db/fixtures/files/users/avatars/user1.png"
 
 user2:
   name: "毎日 とほ"
   discord_uid: 987654321098765432
-  avatar_url: "test/fixtures/files/users/avatars/user2.png"
+  avatar_url: "db/fixtures/files/users/avatars/user2.png"
 
 user3:
   name: "サン・ポー"
   discord_uid: 123456789098765432
-  avatar_url: "test/fixtures/files/users/avatars/user3.png"
+  avatar_url: "db/fixtures/files/users/avatars/user3.png"
