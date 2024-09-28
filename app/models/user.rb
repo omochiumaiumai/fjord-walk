@@ -12,4 +12,8 @@ class User < ApplicationRecord
       user.avatar_url = auth_info.info.image
     end
   end
+
+  def attendance_days_count
+    attendances.select('DATE(attended_on)').distinct.count
+  end
 end

@@ -3,5 +3,9 @@
     /img src= @user.avatar_url
   .name
     = @user.name
+  .attendance_days_count
+    | 合計参加日数: 
+    = @user.attendance_days_count
+    | 日
 
 = link_to "edit", edit_user_path
