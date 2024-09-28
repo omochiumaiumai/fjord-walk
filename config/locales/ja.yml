@@ -3,3 +3,7 @@ ja:
     user_name_update: 'ユーザー名が更新されました。'
   alert:
     user_not_found: 'ユーザーが見つかりません。'
+  event:
+    notice:
+      create_sucsess: 'イベントが作成されました'
+    alert:
