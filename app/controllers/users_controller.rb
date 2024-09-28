@@ -13,7 +13,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to @user, notice: 'ユーザー名が更新されました。'
+      flash[:notice] = t('notice.user_name_update')
+      redirect_to @user
     else
       render :edit
     end
@@ -25,7 +26,8 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
     return unless @user.nil?
 
-    redirect_to root_path, alert: 'ユーザーが見つかりません。'
+    flash[:alert] = t('alert.user_not_found')
+    redirect_to root_path
   end
 
   def user_params
