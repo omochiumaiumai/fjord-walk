@@ -1,7 +1,7 @@
-dev#content
-  p#img
-    img src= @user.avatar_url
-  p#name
+.content
+  .avatar
+    /img src= @user.avatar_url
+  .name
     = @user.name
 
-  = link_to "edit", edit_user_path
+= link_to "edit", edit_user_path
