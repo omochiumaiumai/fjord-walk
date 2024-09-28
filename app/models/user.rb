@@ -12,4 +12,12 @@ class User < ApplicationRecord
       user.avatar_url = auth_info.info.image
     end
   end
+
+  def attendance_days_count
+    attendances.select('DATE(attended_on)').distinct.count
+  end
+
+  def last_attendance_date
+    attendances.order(attended_on: :desc).pick(:attended_on)
+  end
 end

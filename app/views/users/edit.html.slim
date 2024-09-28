@@ -1,0 +1,10 @@
+.container
+  = form_with model: @user, url: user_path(@user), method: :put do |form|
+    .form-group
+      = form.label :name, 'ユーザー名'
+      = form.text_field :name
+    
+    .form-group
+      = form.submit '変更'
+    
+  = link_to 'キャンセル', user_path(@user)

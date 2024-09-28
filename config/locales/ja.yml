@@ -1,0 +1,5 @@
+ja:
+  notice:
+    user_name_update: 'ユーザー名が更新されました。'
+  alert:
+    user_not_found: 'ユーザーが見つかりません。'
