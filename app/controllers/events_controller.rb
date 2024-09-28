@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to events_path, notice: "イベントが作成されました"
+      redirect_to events_path, notice: t('event.create_sucsess')
     else
       render :new
     end
