@@ -7,5 +7,9 @@
     | 合計参加日数: 
     = @user.attendance_days_count
     | 日
+  .last_attendance_date 
+    | 最後に参加した日: 
+    = @user.last_attendance_date ? @user.last_attendance_date.strftime('%Y年%m月%d日(%a)') : 'まだ参加していません'
+
 
 = link_to "edit", edit_user_path
