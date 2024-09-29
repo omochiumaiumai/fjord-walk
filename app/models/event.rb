@@ -7,4 +7,5 @@ class Event < ApplicationRecord
   has_many :talk_themes, dependent: :destroy
   belongs_to :users
 
+  scope :active, -> { where(status: 'active') }
 end
