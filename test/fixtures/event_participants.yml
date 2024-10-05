@@ -1,11 +1,31 @@
-participant1:
-  event_id: 1
-  user_id: 1
+event_participant1:
+  user: user1
+  event: event1
 
-participant2:
-  event_id: 1
-  user_id: 2
+event_participant2:
+  user: user2
+  event: event1
 
-participant3:
-  event_id: 1
-  user_id: 3
+event_participant3:
+  user: user2
+  event: event2
+
+event_participant4:
+  user: user3
+  event: event2
+
+event_participant5:
+  user: user3
+  event: event3
+
+event_participant6:
+  user: user1
+  event: event3
+
+event_participant7:
+  user: user1
+  event: event5
+
+event_participant8:
+  user: user2
+  event: event5
