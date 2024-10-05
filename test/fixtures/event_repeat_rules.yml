@@ -24,6 +24,6 @@ event_repeat_rule5:
   day_of_the_week: 5  # 金曜日
 
 event_repeat_rule6:
-  event: event5
+  event: event4
   frequency: 0  # 毎週
   day_of_the_week: 6  # 土曜日

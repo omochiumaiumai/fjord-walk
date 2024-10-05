@@ -28,7 +28,7 @@ event3:
   user_id: 3
   hold_national_holiday: false
 
-event5:
+event4:
   title: "削除済みのイベント"
   description: "削除されたイベントです。"
   start_time: <%= Time.zone.local(2024, 10, 5, 10, 0, 0) %>
