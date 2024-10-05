@@ -1,42 +1,39 @@
 event1:
-  id: 1
-  title: "毎週開催のイベント(祝日非開催)"
+  title: "毎週日曜開催のイベント(祝日非開催)"
   description: "毎週日曜日に開催するイベントです。"
-  start_time: 2024-10-01 06:00:00
-  end_time: 2024-10-01 07:00:00
+  start_time: <%= Time.zone.local(2024, 10, 13, 10, 0, 0) %>
+  end_time: <%= Time.zone.local(2024, 10, 13, 12, 0, 0) %>
   status: "active"
   deletion_requested: false
   user_id: 1
   hold_national_holiday: false
 
 event2:
-  id: 2
-  title: "複数曜日指定のイベント(祝日開催)"
-  description: "毎週月・金曜日に開催されるイベントです。"
-  start_time: 2024-10-02 09:00:00
-  end_time: 2024-10-02 11:00:00
+  title: "毎週月曜日・水曜日開催イベント(祝日開催)"
+  description: "毎週月曜日と水曜日に開催するイベントです。祝日も開催します。"
+  start_time: <%= Time.zone.local(2024, 10, 14, 9, 0, 0) %>
+  end_time: <%= Time.zone.local(2024, 10, 14, 11, 0, 0) %>
   status: "active"
   deletion_requested: false
   user_id: 2
   hold_national_holiday: true
 
 event3:
-  id: 3
-  title: "隔週開催のイベント"
-  description: "隔週(第1週・第3週)水曜日に開催されるイベント"
-  start_time: 2024-10-02 12:00:00
-  end_time: 2024-10-02 13:00:00
+  title: "第1・第3金曜日開催イベント(祝日非開催)"
+  description: "毎月第1金曜日と第3金曜日に開催されるイベントです。"
+  start_time: <%= Time.zone.local(2024, 11, 1, 14, 0, 0) %>
+  end_time: <%= Time.zone.local(2024, 11, 1, 16, 0, 0) %>
   status: "active"
   deletion_requested: false
   user_id: 3
+  hold_national_holiday: false
 
-
-event4:
-  id: 4
-  title: "終了したイベント"
-  description: "毎週木曜日に開催されていたイベントです。"
-  start_time: 2024-10-02 12:00:00
-  end_time: 2024-10-02 13:00:00
+event5:
+  title: "削除済みのイベント"
+  description: "削除されたイベントです。"
+  start_time: <%= Time.zone.local(2024, 10, 5, 10, 0, 0) %>
+  end_time: <%= Time.zone.local(2024, 10, 5, 12, 0, 0) %>
   status: "deleted"
   deletion_requested: true
   user_id: 1
+  hold_national_holiday: false
