@@ -26,6 +26,7 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :restrict_with_error
   has_many :talk_themes, dependent: :destroy
   belongs_to :user
+  accepts_nested_attributes_for :event_repeat_rules, allow_destroy: true
 
   scope :active, -> { where(status: 'active') }
   scope :scheduled_on, ->(date) { active.filter { |event| event.scheduled_on?(date) } }
