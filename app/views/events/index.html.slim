@@ -4,5 +4,6 @@
       | イベント作成
   .events-title
     - @events.each do |event|
-      li
-        = link_to event.title, event_path(event)
+      - if event.status == 'active'
+        li
+          = link_to event.title, event_path(event)
