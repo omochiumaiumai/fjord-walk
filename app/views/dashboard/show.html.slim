@@ -2,7 +2,35 @@
   .user-name.flex.items-center.text-2xl
     = link_to user_path(@user) do
       img src=@user.avatar_url alt="User Icon" class="w-10 h-10 rounded-full mr-2"
-    = @user.name
+        = @user.name
   .calendar
     = month_calendar do |date|
       = date.day
+      - if @attendances.include?(date)
+        | 💮
+  .upcoming-event
+    | 次回のイベント
+    - upcoming_event = @user.upcoming_event
+    - if upcoming_event.present?
+      .event-title
+        = upcoming_event.title
+      .event-start_time
+        = upcoming_event.start_time
+      .attendance
+        - attendance = current_user.attendance_for(upcoming_event)
+        - if attendance
+          | 出席登録済みです
+          = button_to '出席取り消し', event_attendance_path(upcoming_event.id, attendance.id), method: :delete, class: 'btn btn-danger'
+        - else
+          | 出席登録をしてください
+          = button_to '出席登録', event_attendances_path(upcoming_event.id), method: :post, class: 'btn btn-success'
+      .attemded-users
+        | 参加者 (#{@attended_users.count}人)
+        - if @attended_users.any?
+          ul
+            - @attended_users.each do |user|
+              li
+                img src= @user.avatar_url
+                = link_to user.name, user_path(user)
+        - else
+        | 現在、参加しているユーザーはいません。
