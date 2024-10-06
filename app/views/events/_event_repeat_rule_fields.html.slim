@@ -1,0 +1,8 @@
+.form-frequency
+  = f.select :frequency, Event::FREQUENCY_LIST, {}
+.form-day-of-the-week
+    = f.label :day_of_the_week, class: 'form-day-of-the-week'
+      .form-select
+        = f.select :day_of_the_week, Event::DAY_OF_THE_WEEK_LIST, {}
+.form-submit
+  = link_to_remove_association '削除', f, class: 'form-submit'

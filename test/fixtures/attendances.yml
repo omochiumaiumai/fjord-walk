@@ -1,15 +1,33 @@
 attendance1:
-  attended_on: 2024-10-01 05:30:00
-  event_id: 1
-  user_id: 1
-
+  event: event1
+  user: user1
 
 attendance2:
-  attended_on: 2024-10-02 05:30:00
-  event_id: 1
-  user_id: 2
+  attended_on: <%= Time.zone.local(2024, 10, 14) %>
+  event: event2
+  user: user2
 
 attendance3:
-  attended_on: 2024-10-02 05:30:00
-  event_id: 2
-  user_id: 1
+  attended_on: <%= Time.zone.local(2024, 10, 14) %>
+  event: event2
+  user: user3
+
+attendance4:
+  attended_on: <%= Time.zone.local(2024, 11, 1) %>
+  event: event3
+  user: user1
+
+attendance5:
+  attended_on: <%= Time.zone.local(2024, 11, 1) %>
+  event: event3
+  user: user3
+
+attendance6:
+  attended_on: <%= Time.zone.local(2024, 10, 5) %>
+  event: event5
+  user: user1
+
+attendance7:
+  attended_on: <%= Time.zone.local(2024, 10, 5) %>
+  event: event5
+  user: user2

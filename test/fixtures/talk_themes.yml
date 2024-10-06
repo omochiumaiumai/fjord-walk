@@ -1,14 +1,14 @@
 theme1:
   theme: "最近気になるニュースについて"
-  event_id: 1
-  user_id: 1
+  event: event1
+  user: user1
 
 theme2:
   theme: "おすすめの技術書"
-  event_id: 1
-  user_id: 2
+  event: event1
+  user: user2
 
 theme3:
   theme: "仕事に取り組む上で意識していること"
-  event_id: 2
-  user_id: 1
+  event: event2
+  user: user3

@@ -1,0 +1,24 @@
+= form_with(model: @event, local: true) do |f|
+  .form-title
+    = f.label :title, "タイトル"
+    = f.text_field :title
+
+  .form-description
+    = f.label :description, "説明"
+    = f.text_field :description
+  .form-dates
+    | 開催日
+    = f.fields_for :event_repeat_rules do |event_repeat_rule|
+      = render 'event_repeat_rule_fields', f: event_repeat_rule
+    .form-add-dates
+      = link_to_add_association f, :event_repeat_rules do
+        | 開催日追加
+  .form-holiday
+    = f.check_box :hold_national_holiday, {}, true, false
+    = f.label :hold_national_holiday, "祝日も含める"
+  .form-start-time
+      = f.time_select :start_time
+  .form-end-time
+    = f.time_select :end_time
+    .form-submit
+      = f.submit "送信"
