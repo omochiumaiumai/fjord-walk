@@ -11,5 +11,5 @@
     | 最後に参加した日: 
     = @user.last_attendance_date ? @user.last_attendance_date.strftime('%Y年%m月%d日(%a)') : 'まだ参加していません'
 
-
-= link_to "edit", edit_user_path
+  - if current_user == @user
+    = link_to "edit", edit_user_path
