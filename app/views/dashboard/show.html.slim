@@ -6,7 +6,7 @@
   .calendar
     = month_calendar do |date|
       = date.day
-      - if @attendances.include?(date)
+      - if @attended_events.any? { |attendance| attendance.event.start_time.to_date == date }
         | 💮
   .upcoming-event
     | 次回のイベント
@@ -30,7 +30,8 @@
           ul
             - @attended_users.each do |user|
               li
-                img src= @user.avatar_url
-                = link_to user.name, user_path(user)
+                = link_to user_path(user) do
+                  img src= user.avatar_url
+                  = user.name
         - else
-        | 現在、参加しているユーザーはいません。
+          | 現在、参加しているユーザーはいません。

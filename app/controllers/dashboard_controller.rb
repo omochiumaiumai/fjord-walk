@@ -6,9 +6,15 @@ class DashboardController < ApplicationController
     @user = User.find(params[:user_id])
     @attendances = @user.attendances.pluck(:attended_on)
     @attended_events = @user.attendances.includes(:event).where.not(attended_on: nil)
-    @attended_users = @attended_events.map(&:event).flat_map do |event|
-      event.attendances.includes(:user).where.not(attended_on: nil).map(&:user)
-    end.uniq
+    @upcoming_attendances = @user.attendances.includes(:event).where(attended_on: Time.zone.today..)
+
+    @attended_users = if @upcoming_attendances.any?
+                        @upcoming_attendances.map(&:event).flat_map do |event|
+                          event.attendances.includes(:user).where(attended_on: Time.zone.today..).map(&:user)
+                        end.uniq
+                      else
+                        []
+                      end
   end
 
   private
