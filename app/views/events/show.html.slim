@@ -1,10 +1,19 @@
 .page-main
-  .event-title
-    = @event.title
-  .event-description
-    = @event.description
-  .event-start_time
-    = @event.start_time
-  .event-end_time
-    = @event.end_time
+  .event-registration
+    - if current_user.event_participants.exists?(event_id: @event.id)
+      - participant = current_user.event_participants.find_by(event_id: @event.id)
+      = button_to event_event_participant_path(@event, participant), method: :delete, data: { turbo: false } do
+        | 参加取り消し
+    - else
+      = button_to event_event_participants_path(@event), method: :post, data: { turbo: false } do
+        | 参加する
+  .event-details
+    .event-title
+      = @event.title
+    .event-description
+      = @event.description
+    .event-start_time
+      = @event.start_time
+    .event-end_time
+      = @event.end_time
 = link_to 'イベント一覧', events_path

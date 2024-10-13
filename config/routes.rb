@@ -6,5 +6,8 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   delete 'log_out', to: 'sessions#destroy', as:'log_out'
   resources :users, only: [:show, :edit, :update ]
-  resources :events, only: [:index, :show, :new, :create, :edit, :update]
+  resources :events, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :event_participants, only: [:create, :destroy]
+    resources :attendances, only: [:create, :destroy]
+  end
 end
