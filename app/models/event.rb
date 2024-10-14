@@ -22,6 +22,7 @@ class Event < ApplicationRecord
   ].freeze
 
   has_many :event_participants, dependent: :restrict_with_error
+  has_many :users, through: :event_participants
   has_many :event_repeat_rules, dependent: :destroy
   has_many :attendances, dependent: :restrict_with_error
   has_many :talk_themes, dependent: :destroy
