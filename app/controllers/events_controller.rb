@@ -14,13 +14,27 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
   def create
     @event = Event.new(event_params)
     @event.user_id = current_user.id
+    @event.event_participants.new(user: current_user)
     if @event.save
       redirect_to events_path, notice: t('event.create_sucsess')
     else
       render :new
+    end
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event, notice: 'イベントが更新されました。'
+    else
+      render :edit
     end
   end
 
