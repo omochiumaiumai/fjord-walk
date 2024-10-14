@@ -2,8 +2,19 @@
   .page-header
     = link_to new_event_path
       | イベント作成
-  .events-title
-    - @events.each do |event|
-      - if event.status == 'active'
-        li
-          = link_to event.title, event_path(event)
+  .events
+    .active-events
+      h2 開催中のイベント
+      .events-title
+        - @events.each do |event|
+          - if event.status == 'active'
+            li
+              = link_to event.title, event_path(event)
+    .deleted-events
+      h2 終了したイベント
+      .events-title
+       - @events.each do |event|
+          - if event.status == 'deleted'
+            li
+              = link_to event.title, event_path(event)
+
