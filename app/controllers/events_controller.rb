@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @event_organizer = User.find(@event.user_id)
   end
 
   def new
@@ -20,6 +21,16 @@ class EventsController < ApplicationController
       redirect_to events_path, notice: t('event.create_sucsess')
     else
       render :new
+    end
+  end
+
+  def request_deletion
+    @event = Event.find(params[:id])
+    if @event.update(deletion_requested: true)
+      flash[:notice] = '削除申請を受け付けました。確認次第、削除対応を行います。ありがとうございました。'
+      redirect_to events_path
+    else
+      redirect_to @event, alert: '削除申請に失敗しました。'
     end
   end
 
