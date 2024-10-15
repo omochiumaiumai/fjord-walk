@@ -54,29 +54,19 @@ module.exports = function (api) {
         },
       ],
       [
+        '@babel/plugin-proposal-private-property-in-object',
+        {
+          useBuiltIns: true,
+          loose: true,
+        }
+      ],
+      [
         '@babel/plugin-proposal-private-methods',
         {
           loose: true
         }
       ],
-      [
-        '@babel/plugin-proposal-private-property-in-object',
-        {
-          useBuiltIns: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-private-methods',
-        {
-          loose: true
-        }
-      ],
-      [
-        '@babel/plugin-proposal-private-property-in-object',
-        {
-          loose: true
-        }
-      ],
+
       [
         '@babel/plugin-transform-runtime',
         {
@@ -89,6 +79,9 @@ module.exports = function (api) {
           async: false,
         },
       ],
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
+      '@babel/plugin-transform-logical-assignment-operators',
     ].filter(Boolean),
   }
 }
