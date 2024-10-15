@@ -3,4 +3,5 @@ vendor/**
 **/bundle/**
 babel.config.js
 public/packs
+public/packs-test
 **/assets
