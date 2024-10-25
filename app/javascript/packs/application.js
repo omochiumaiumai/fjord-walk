@@ -4,6 +4,8 @@
 // that code so it'll be compiled.
 import "@hotwired/turbo-rails"
 
+import "../toggle-menu.js"
+
 require('@rails/ujs').start()
 require('turbolinks').start()
 require('@rails/activestorage').start()
