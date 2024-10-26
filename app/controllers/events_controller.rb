@@ -12,6 +12,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @event.event_repeat_rules.build
   end
 
   def edit
