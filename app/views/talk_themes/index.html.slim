@@ -1,0 +1,17 @@
+h1 トークテーマ一覧
+.talk-theme-form
+  = form_with(model: [@event, TalkTheme.new], local: true) do |f|
+    .add-theme
+      = f.label :theme, "トークテーマ名"
+      = f.text_field :theme
+    = f.submit "追加"
+.talk-themes
+ ul
+  - @talk_themes.each do |talk_theme|
+    li
+      .talk-theme
+        = talk_theme.theme
+        - if talk_theme.user_id == current_user.id
+          = button_to '削除', event_talk_theme_path(@event, talk_theme), method: :delete, data: { confirm: '本当に削除しますか？' }
+          
+

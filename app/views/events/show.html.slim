@@ -6,6 +6,8 @@ header.page-header
   .border-t-2
 
 .page-main
+  .talk-theme-path
+      = link_to "トークテーマ", event_talk_themes_path(@event)
   .container.mx-auto.py-6
     .event-details
       - if @event.status == 'deleted'
@@ -56,4 +58,4 @@ header.page-header
         = link_to '編集する', edit_event_path(@event), class: 'mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors'
       .event-deletion-request.mt-6
         = button_to '削除申請', request_deletion_event_path(@event), method: :post, class: 'mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors', data: { confirm: '削除申請をしますか？' }
-    = link_to 'イベント一覧', events_path, class: 'block mt-6 text-blue-500 hover:underline'
+      = link_to 'イベント一覧', events_path, class: 'block mt-6 text-blue-500 hover:underline'
