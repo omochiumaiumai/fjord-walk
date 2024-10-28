@@ -5,7 +5,8 @@
     "node": true,
     "es2022": true
   },
-  "extends": ["standard", "prettier"],
+  "extends": ["standard", "prettier", "plugin:tailwindcss/recommended","eslint:recommended"],
+  "plugins": ["tailwindcss"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
