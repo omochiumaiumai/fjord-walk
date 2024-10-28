@@ -14,6 +14,9 @@
     .event-organizer
     | 主催者: 
     = link_to @event_organizer.name, user_path(@event_organizer.id)
+    .next-schedule
+      | 次の開催日
+      = @event.next_scheduled_date
     .event_times
       .event-start_time
         = @event.start_time

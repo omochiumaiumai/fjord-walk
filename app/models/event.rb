@@ -39,6 +39,11 @@ class Event < ApplicationRecord
     (from..to).filter { |date| date_match_the_rules?(date, event_repeat_rules) }
   end
 
+  def next_scheduled_date
+    today = Time.zone.today
+    all_scheduled_dates.select { |date| date >= today }.min
+  end
+
   def date_match_the_rules?(date, rules)
     rules.any? do |rule|
       if rule.frequency.zero?
