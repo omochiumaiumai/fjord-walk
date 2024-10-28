@@ -1,17 +1,19 @@
-h1 トークテーマ一覧
-.talk-theme-form
-  = form_with(model: [@event, TalkTheme.new], local: true) do |f|
-    .add-theme
-      = f.label :theme, "トークテーマ名"
-      = f.text_field :theme
-    = f.submit "追加"
-.talk-themes
- ul
-  - @talk_themes.each do |talk_theme|
-    li
-      .talk-theme
-        = talk_theme.theme
-        - if talk_theme.user_id == current_user.id
-          = button_to '削除', event_talk_theme_path(@event, talk_theme), method: :delete, data: { confirm: '本当に削除しますか？' }
-          
-
+.page-main
+  .max-w-2xl.mx-auto.bg-white.shadow-md.p-6.rounded-lg
+    h1.text-2xl.font-bold.mb-4 トークテーマ一覧
+    .talk-theme-form.mb-6
+      = form_with(model: [@event, TalkTheme.new], local: true) do |f|
+        .add-theme.flex.items-center.mb-4
+          = f.label :theme, "トークテーマ名", class: "block text-lg font-medium text-gray-700 mr-2"
+          = f.text_field :theme, class: "flex-1 border border-gray-300 rounded-md p-2"
+          = f.submit "追加", class: "ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+    .talk-themes
+      ul.list-none
+        - @talk_themes.each_with_index do |talk_theme, index|
+          li.mb-2.list-none class=(index.even? ? "bg-white" : "bg-gray-100") 
+            .border.border-gray-300.rounded-lg.p-4
+              .flex.items-center.justify-between
+                .talk-theme.text-lg.text-gray-800
+                  = talk_theme.theme
+                - if talk_theme.user_id == current_user.id
+                  = button_to '削除', event_talk_theme_path(@event, talk_theme), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "ml-4 px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600"
