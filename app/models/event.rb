@@ -36,7 +36,14 @@ class Event < ApplicationRecord
     from: Date.new(Time.current.year, 1, 1),
     to: Date.new(Time.current.year, 12, 31)
   )
-    (from..to).filter { |date| date_match_the_rules?(date, event_repeat_rules) }
+    holidays = HolidayJp.between(from, to).map(&:date)
+    (from..to).filter do |date|
+      if hold_national_holiday == false && holidays.include?(date)
+        false
+      else
+        date_match_the_rules?(date, event_repeat_rules)
+      end
+    end
   end
 
   def next_scheduled_date
