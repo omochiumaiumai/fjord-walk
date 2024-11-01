@@ -39,6 +39,7 @@ gem 'omniauth-rails_csrf_protection'
 
 gem 'simple_calendar'
 gem 'rails-i18n'
+gem 'holiday_jp'
 gem 'view_component'
 gem 'cocoon'
 
