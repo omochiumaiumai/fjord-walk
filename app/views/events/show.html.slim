@@ -8,6 +8,9 @@ header.page-header
 .page-main
   .container.mx-auto.py-6
     .event-details
+      - if @event.status == 'deleted'
+        .ended-notification.flex.justify-center.border-2.border-red-500.bg-red-300.p-4.my-4.text-white
+          | このイベントは終了しました。
       .event-title.flex.items-center.justify-start
         h2.text-3xl.font-bold= @event.title
         - unless @event_organizer == current_user || @event.status == 'deleted'
@@ -23,32 +26,34 @@ header.page-header
       .event-organizer.flex.items-center.mt-4
         img.rounded-full.w-12.h-12 src=@event_organizer.avatar_url
         = link_to @event_organizer.name, user_path(@event_organizer.id), class: 'ml-2 hover:underline'
-      .next-schedule.mt-4
-        span.font-semibold 次の開催日:
-        = @event.next_scheduled_date
-
-      .event_times.flex.items-center.mt-2
-        .event-start_time
-          | 開始時間:
+      - if @event.status == 'active'
+        .event-times.mt-4
+          span.font-semibold 開催時間: 
+          = @event.repeat_rules
           span.ml-2= @event.start_time.strftime("%H:%M")
-        .event-end_time.ml-4
-          | 終了時間:
-          span.ml-2= @event.end_time.strftime("%H:%M")
-
+          |  ~ 
+          = @event.end_time.strftime("%H:%M")
+          | (祝日#{@event.hold_national_holiday ? 'も開催' : 'は休み'}）
+        .next-schedule.mt-4
+          span.font-semibold 次の開催日: 
+          = @event.next_scheduled_date.strftime("%Y年%m月%d日")
       .event-description.mt-6
         h3.text-xl.font-semibold イベント内容
-        p.mt-2= @event.description
+        p.mt-2= simple_format(@event.description)
 
       .event-participants.mt-6
-        span.font-semibold 参加者(
+        span.font-semibold 参加者
+        | (
         = @event.users.count
         | 人)
         ul.flex.flex-wrap.mt-2
           - @event.users.each do |user|
             li.mr-4
               = link_to user_path(user.id) do
-                img.rounded-full.w-12.h-12 src=user.avatar_url
+                img.rounded-full.w-12.h-12 src=user.avatar_url      
     - if @event.user == current_user
+      .event-edit-path.mt-6
+        = link_to '編集する', edit_event_path(@event), class: 'mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors'
       .event-deletion-request.mt-6
-        = button_to '削除申請', request_deletion_event_path(@event), method: :post, class: 'mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors', data: { confirm: '削除申請をしますか？' }
+        = button_to '削除申請', request_deletion_event_path(@event), method: :post, class: 'mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors', data: { confirm: '削除申請をしますか？' }
     = link_to 'イベント一覧', events_path, class: 'block mt-6 text-blue-500 hover:underline'
