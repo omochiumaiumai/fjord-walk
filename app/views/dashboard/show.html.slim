@@ -1,5 +1,8 @@
-img src= @user.avatar_url
-= @user.name
-
-= month_calendar do |date|
-  = date
+.page-main
+  .user-name.flex.items-center.text-2xl
+    = link_to user_path(@user) do
+      img src=@user.avatar_url alt="User Icon" class="w-10 h-10 rounded-full mr-2"
+    = @user.name
+  .calendar
+    = month_calendar do |date|
+      = date.day
