@@ -32,6 +32,11 @@ class Event < ApplicationRecord
   scope :active, -> { where(status: 'active') }
   scope :scheduled_on, ->(date) { active.filter { |event| event.scheduled_on?(date) } }
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validate :event_time_conflict
+  validate :duration_within_one_hour
+
   def all_scheduled_dates(
     from: Date.new(Time.current.year, 1, 1),
     to: Date.new(Time.current.year, 12, 31)
@@ -67,5 +72,46 @@ class Event < ApplicationRecord
 
   def nth_wday(date)
     (date.day + 6) / 7
+  end
+
+  def repeat_rules
+    event_repeat_rules.map do |rule|
+      holding_frequency = FREQUENCY_LIST.find { |frequency| frequency[1] == rule.frequency }[0]
+      holding_day_of_the_week = DAY_OF_THE_WEEK_LIST.find do |day_of_the_week|
+        day_of_the_week[1] == rule.day_of_the_week
+      end[0]
+      holding_frequency + holding_day_of_the_week
+    end.join('、')
+  end
+
+  private
+
+  def duration_within_one_hour
+    return unless start_time && end_time
+    return unless (end_time - start_time) > 1.hour
+
+    errors.add(:base, 'イベントの開催時間は1時間以内に設定してください。')
+  end
+
+  def event_time_conflict
+    event_repeat_rules.each do |rule|
+      start_time_only = start_time.seconds_since_midnight
+      end_time_only = end_time.seconds_since_midnight
+
+      conflicting_events = Event.joins(:event_repeat_rules)
+                                .where.not(id:)
+                                .where(status: 'active')
+                                .where(event_repeat_rules: { day_of_the_week: rule.day_of_the_week })
+                                .where(
+                                  'EXTRACT(EPOCH FROM events.start_time::time) < ? AND EXTRACT(EPOCH FROM events.end_time::time) > ? OR EXTRACT(EPOCH FROM events.start_time::time) >= ? AND EXTRACT(EPOCH FROM events.start_time::time) < ?',
+                                  end_time_only, start_time_only, start_time_only, end_time_only
+                                )
+
+      next unless conflicting_events.exists?
+
+      conflicting_titles = conflicting_events.pluck(:title).join(', ')
+      errors.add(:base, "登録しようとした時間は「#{conflicting_titles}」が開催中です。こちらのイベントに参加するか、別の時間を選択してください。")
+      break
+    end
   end
 end
