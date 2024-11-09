@@ -2,7 +2,7 @@
 
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @events = Event.order(created_at: :desc)
   end
 
   def show
@@ -26,7 +26,8 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path, notice: t('event.create_sucsess')
     else
-      render :new
+      flash[:alert] = @event.errors.full_messages.to_sentence
+      redirect_to new_event_path
     end
   end
 
@@ -57,6 +58,7 @@ class EventsController < ApplicationController
       :description,
       :start_time,
       :end_time,
+      :hold_national_holiday,
       event_repeat_rules_attributes: %i[id event_id frequency day_of_the_week _destroy]
     )
   end
