@@ -1,13 +1,11 @@
-// app/javascript/menu.js
-
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbo:load', () => {
   const button = document.getElementById('button');
   const bars = document.getElementById('bars');
   const xmark = document.getElementById('xmark');
   const menu = document.getElementById('menu');
 
   if (menu) {
-    menu.classList.add('hidden');
+    menu.classList.add('translate-x-full');
   }
   if (bars) {
     bars.classList.remove('hidden');
@@ -17,14 +15,17 @@ document.addEventListener('turbolinks:load', () => {
   }
 
   if (button) {
-    button.addEventListener('click', event => {
-      if (!bars.classList.contains('hidden')) {
+    button.addEventListener('click', () => {
+      if (menu.classList.contains('translate-x-full')) {
+        menu.classList.remove('translate-x-full');
+        menu.classList.add('translate-x-0');
         bars.classList.add('hidden');
-        menu.classList.remove('hidden');
+        xmark.classList.remove('hidden');
       } else {
+        menu.classList.remove('translate-x-0');
+        menu.classList.add('translate-x-full');
         bars.classList.remove('hidden');
         xmark.classList.add('hidden');
-        menu.classList.add('hidden');
       }
     });
   }

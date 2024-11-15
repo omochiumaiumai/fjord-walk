@@ -28,7 +28,7 @@
           <i id="xmark" class="fa-solid fa-xmark fa-2xl transition hover:opacity-40 hidden"></i>
         </button>
         <% if logged_in? %>
-          <ul id="menu" class="z-0 fixed top-20 right-0 w-1/4 text-right bg-black/50 text-2xl h-full flex flex-col items-center">
+          <ul id="menu" class="fixed top-20 right-0 w-1/4 text-2xl h-full bg-black/50 text-white flex flex-col items-center justify-start pt-10 transform translate-x-full transition-transform duration-300">
             <li class="p-3 transition hover:opacity-40"><%= link_to "MyPage", user_path(current_user.id) %></li>
             <li class="p-3 transition hover:opacity-40"><%= link_to "Events", events_path %></li>
             <li class="p-3 transition hover:opacity-40"><%= link_to "Logout", log_out_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %></li>
