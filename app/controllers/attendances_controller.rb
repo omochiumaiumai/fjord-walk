@@ -4,11 +4,11 @@ class AttendancesController < ApplicationController
   before_action :set_event
 
   def create
-    @attendance = @event.attendances.new(user: current_user, attended_on: Date.today)
+    @attendance = @event.attendances.new(user: current_user, attended_on: Time.zone.today)
     if @attendance.save
-      redirect_to dashboard_path(current_user), notice: '出席登録が完了しました。'
+      redirect_to dashboard_path(current_user), notice: t('notice.attendance.create_success')
     else
-      redirect_to dashboard_path(current_user), alert: '出席登録に失敗しました。'
+      redirect_to dashboard_path(current_user), alert: t('alert.attendance.create_failure')
     end
   end
 
@@ -16,9 +16,9 @@ class AttendancesController < ApplicationController
     @attendance = @event.attendances.find_by(user: current_user)
     if @attendance
       @attendance.destroy
-      redirect_to dashboard_path(current_user), notice: '出席を取り消しました。'
+      redirect_to dashboard_path(current_user), notice: t('notice.attendance.destroy_success')
     else
-      redirect_to dashboard_path(current_user), alert: '出席取り消しに失敗しました。'
+      redirect_to dashboard_path(current_user), alert: t('alert.attendance.destroy_failure')
     end
   end
 
