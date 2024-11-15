@@ -26,15 +26,14 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to events_path, notice: t('event.create_sucsess')
     else
-      flash[:alert] = @event.errors.full_messages.to_sentence
-      redirect_to new_event_path
+      event_create_failure
     end
   end
 
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
-      redirect_to @event, notice: 'イベントが更新されました。'
+      redirect_to @event, notice: t('event.update_sucsess')
     else
       render :edit
     end
@@ -43,14 +42,19 @@ class EventsController < ApplicationController
   def request_deletion
     @event = Event.find(params[:id])
     if @event.update(deletion_requested: true)
-      flash[:notice] = '削除申請を受け付けました。確認次第、削除対応を行います。ありがとうございました。'
+      flash[:notice] = t('event.request_deletion')
       redirect_to events_path
     else
-      redirect_to @event, alert: '削除申請に失敗しました。'
+      redirect_to @event, alert: t('event.request_deletion_failure')
     end
   end
 
   private
+
+  def event_create_failure
+    flash[:alert] = @event.errors.full_messages.to_sentence
+    redirect_to new_event_path
+  end
 
   def event_params
     params.require(:event).permit(

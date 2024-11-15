@@ -6,9 +6,9 @@ class EventParticipantsController < ApplicationController
   def create
     @participant = @event.event_participants.new(user: current_user)
     if @participant.save
-      flash[:notice] = 'イベントへの参加登録が完了しました。'
+      flash[:notice] = t('event.notice.entry_sucsess')
     else
-      flash[:alert] = '参加登録に失敗しました。'
+      flash[:alert] = t('event.alert.entry_failure')
     end
     redirect_to event_path(@event)
   end
@@ -17,9 +17,9 @@ class EventParticipantsController < ApplicationController
     @participant = EventParticipant.find_by(event_id: @event.id, user_id: current_user.id)
     if @participant
       @participant.destroy
-      flash[:notice] = 'イベントへの参加を取り消しました。'
+      flash[:notice] = t('event.notice.entry_cancel')
     else
-      flash[:alert] = 'イベントへの参加取り消しに失敗しました。'
+      flash[:alert] = t('event.alert.entry_cancel_failure')
     end
     redirect_to event_path(@event)
   end
