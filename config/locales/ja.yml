@@ -10,6 +10,9 @@ ja:
       create_sucsess: イベントが作成されました。
       update_sucsess: イベントを更新しました。
       request_deletion: 削除申請を受け付けました。確認次第、削除対応を行います。ありがとうございました。
+    talk_theme:
+      create_success: トークテーマが追加されました。
+      destroy_success: トークテーマが削除されました。
     attendance:
       create_success: 出席登録が完了しました。
       destroy_success: 出席を取り消しました。
@@ -21,6 +24,8 @@ ja:
       entry_failure: イベントへの参加登録に失敗しました。
       entry_cancel_failure: イベントへの参加取り消しに失敗しました。
       request_deletion_failure: 削除申請に失敗しました。
+    talk_theme:
+      not_participating: このイベントに参加していないため、トークテーマを登録できません。
     attendance:
       create_failure: 出席登録に失敗しました。
       destroy_failure: 出席取り消しに失敗しました。

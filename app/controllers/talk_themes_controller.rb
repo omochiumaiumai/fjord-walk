@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TalkThemesController < ApplicationController
   before_action :set_event
   before_action :check_participation, only: [:create]
@@ -10,7 +12,7 @@ class TalkThemesController < ApplicationController
     @talk_theme = @event.talk_themes.new(talk_theme_params)
     @talk_theme.user_id = current_user.id
     if @talk_theme.save
-      redirect_to event_talk_themes_path(@event), notice: 'トークテーマが追加されました。'
+      redirect_to event_talk_themes_path(@event), notice: t('notice.talk_theme.create_success')
     else
       render :index
     end
@@ -19,7 +21,7 @@ class TalkThemesController < ApplicationController
   def destroy
     @talk_theme = @event.talk_themes.find(params[:id])
     @talk_theme.destroy
-    redirect_to event_talk_themes_path(@event), notice: 'トークテーマが削除されました。'
+    redirect_to event_talk_themes_path(@event), notice: t('notice.talk_theme.destroy_success')
   end
 
   private
@@ -35,6 +37,6 @@ class TalkThemesController < ApplicationController
   def check_participation
     return if @event.event_participants.exists?(user_id: current_user.id)
 
-    redirect_to @event, alert: 'このイベントに参加していないため、トークテーマを登録できません。'
+    redirect_to @event, alert: t('alert.talk_theme.not_participating')
   end
 end
