@@ -1,6 +1,7 @@
 ja:
   notice:
     user_name_update: 'ユーザー名が更新されました。'
+    user_logout: 'ログアウトしました。'
   alert:
     user_not_found: 'ユーザーが見つかりません。'
   event:
