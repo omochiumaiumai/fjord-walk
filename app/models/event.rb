@@ -95,23 +95,33 @@ class Event < ApplicationRecord
 
   def event_time_conflict
     event_repeat_rules.each do |rule|
-      start_time_only = start_time.seconds_since_midnight
-      end_time_only = end_time.seconds_since_midnight
-
-      conflicting_events = Event.joins(:event_repeat_rules)
-                                .where.not(id:)
-                                .where(status: 'active')
-                                .where(event_repeat_rules: { day_of_the_week: rule.day_of_the_week })
-                                .where(
-                                  'EXTRACT(EPOCH FROM events.start_time::time) < ? AND EXTRACT(EPOCH FROM events.end_time::time) > ? OR EXTRACT(EPOCH FROM events.start_time::time) >= ? AND EXTRACT(EPOCH FROM events.start_time::time) < ?',
-                                  end_time_only, start_time_only, start_time_only, end_time_only
-                                )
-
-      next unless conflicting_events.exists?
-
-      conflicting_titles = conflicting_events.pluck(:title).join(', ')
-      errors.add(:base, "登録しようとした時間は「#{conflicting_titles}」が開催中です。こちらのイベントに参加するか、別の時間を選択してください。")
-      break
+      conflicting_events = find_conflicting_events(rule)
+      add_time_conflict_error(conflicting_events) if conflicting_events.exists?
     end
+  end
+
+  def find_conflicting_events(rule)
+    start_time_only = start_time.seconds_since_midnight
+    end_time_only = end_time.seconds_since_midnight
+
+    Event.joins(:event_repeat_rules)
+         .where.not(id:)
+         .where(status: 'active')
+         .where(event_repeat_rules: { day_of_the_week: rule.day_of_the_week })
+         .where(conflict_conditions, end_time_only, start_time_only, start_time_only, end_time_only)
+  end
+
+  def conflict_conditions
+    <<~SQL.squish
+      EXTRACT(EPOCH FROM events.start_time::time) < ? AND#{' '}
+      EXTRACT(EPOCH FROM events.end_time::time) > ? OR#{' '}
+      EXTRACT(EPOCH FROM events.start_time::time) >= ? AND#{' '}
+      EXTRACT(EPOCH FROM events.start_time::time) < ?
+    SQL
+  end
+
+  def add_time_conflict_error(conflicting_events)
+    conflicting_titles = conflicting_events.pluck(:title).join(', ')
+    errors.add(:base, "登録しようとした時間は「#{conflicting_titles}」が開催中です。こちらのイベントに参加するか、別の時間を選択してください。")
   end
 end
