@@ -27,6 +27,6 @@ class User < ApplicationRecord
   end
 
   def attendance_for(event)
-    attendances.find_by(event: event)
+    attendances.find_by(event:)
   end
 end
