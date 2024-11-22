@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  has_many :events, dependent: :destroy
+  has_many :events, dependent: :destroy, through: :event_participants
   has_many :talk_themes, dependent: :destroy
   has_many :attendances, dependent: :destroy
   has_many :event_participants, dependent: :destroy

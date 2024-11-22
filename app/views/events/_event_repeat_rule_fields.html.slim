@@ -1,8 +1,11 @@
-.form-frequency
-  = f.select :frequency, Event::FREQUENCY_LIST, {}
-.form-day-of-the-week
-    = f.label :day_of_the_week, class: 'form-day-of-the-week'
-      .form-select
-        = f.select :day_of_the_week, Event::DAY_OF_THE_WEEK_LIST, {}
-.form-submit
-  = link_to_remove_association '削除', f, class: 'form-submit'
+.nested-fields.border.border-gray-300.rounded-md.p-4.mb-4
+  .mb-2
+    = f.label :frequency, "開催頻度", class: "block text-gray-700"
+    = f.select :frequency, Event::FREQUENCY_LIST, {}, class: "w-full border border-gray-300 rounded-md p-2"
+
+  .mb-2
+    = f.label :day_of_the_week, "曜日", class: "block text-gray-700"
+    = f.select :day_of_the_week, Event::DAY_OF_THE_WEEK_LIST, {}, class: "w-full border border-gray-300 rounded-md p-2"
+
+  .text-right
+    = link_to_remove_association '削除する', f, class: "text-red-500 hover:text-red-700"

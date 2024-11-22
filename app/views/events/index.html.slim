@@ -1,8 +1,34 @@
+header.page-header
+  .container.flex.justify-between.items-center.mx-auto.py-6
+    h1.text-3xl.font-bold
+      | イベント
+    .new-event-button
+      = button_to 'イベント作成', new_event_path, method: :get, class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'   
+  .border-t-2
 .page-main
-  .page-header
-    = link_to new_event_path
-      | イベント作成
-  .events-title
-    - @events.each do |event|
-      li
-        = link_to event.title, event_path(event)
+  .container.mx-auto.py-6
+    .h2text-3xl.font-bold.my-4
+      | 開催中
+    .active-events
+      .events-title
+        - @events.each do |event|
+          - if event.status == 'active'
+            li.list-none.border.rounded.px-4.py-2.mb-4
+              .flex.items-center
+                img.rounded-full.w-12.h-12.mr-4 src=event.user.avatar_url
+                .flex.flex-col
+                  h2.font-bold
+                    = link_to event.title, event_path(event), class: 'hover:text-gray-600'
+                  span.text-gray-500 開催時間: #{event.repeat_rules} #{event.start_time.strftime("%H:%M")}~#{event.end_time.strftime("%H:%M")}                  
+    .h2text-3xl.font-bold.my-4
+      | 終了
+    .deleted-events
+      .events-title
+       - @events.each do |event|
+          - if event.status == 'deleted'
+            li.list-none.border.rounded.px-4.py-2.mb-4.bg-gray-200.text-gray-600
+              .flex.items-center
+                img.rounded-full.w-12.h-12.mr-4 src=event.user.avatar_url
+                .flex.flex-col
+                  span.font-bold
+                    = link_to event.title, event_path(event), class: 'hover:text-gray-500'

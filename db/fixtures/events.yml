@@ -5,7 +5,7 @@ event1:
   end_time: 2024-10-01 07:00:00
   status: "active"
   deletion_requested: false
-  user_id: 1
+  user_id: user1
   hold_national_holiday: false
 
 event2:
@@ -15,7 +15,7 @@ event2:
   end_time: 2024-10-02 11:00:00
   status: "active"
   deletion_requested: false
-  user_id: 2
+  user_id: user2
   hold_national_holiday: true
 
 event3:
@@ -25,7 +25,7 @@ event3:
   end_time: 2024-10-02 13:00:00
   status: "active"
   deletion_requested: false
-  user_id: 3
+  user_id: user3
 
 
 event4:
@@ -35,4 +35,4 @@ event4:
   end_time: 2024-10-02 13:00:00
   status: "deleted"
   deletion_requested: true
-  user_id: 1
+  user_id: user1

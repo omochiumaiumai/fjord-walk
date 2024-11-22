@@ -5,7 +5,7 @@ event1:
   end_time: <%= Time.zone.local(2024, 10, 13, 12, 0, 0) %>
   status: "active"
   deletion_requested: false
-  user_id: 1
+  user: user1
   hold_national_holiday: false
 
 event2:
@@ -15,7 +15,7 @@ event2:
   end_time: <%= Time.zone.local(2024, 10, 14, 11, 0, 0) %>
   status: "active"
   deletion_requested: false
-  user_id: 2
+  user: user2
   hold_national_holiday: true
 
 event3:
@@ -25,7 +25,7 @@ event3:
   end_time: <%= Time.zone.local(2024, 11, 1, 16, 0, 0) %>
   status: "active"
   deletion_requested: false
-  user_id: 3
+  user: user3
   hold_national_holiday: false
 
 event4:
@@ -35,5 +35,5 @@ event4:
   end_time: <%= Time.zone.local(2024, 10, 5, 12, 0, 0) %>
   status: "deleted"
   deletion_requested: true
-  user_id: 1
+  user: user1
   hold_national_holiday: false

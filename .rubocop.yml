@@ -16,6 +16,10 @@ AllCops:
     - 'test/**/*'
     - 'spec/**/*'
     - 'vendor/**/*'
+  
+Metrics/ClassLength:
+  Exclude: 
+    - app/models/event.rb
 
 Layout/IndentationWidth:
   Enabled: true
