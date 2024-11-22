@@ -20,4 +20,13 @@ class User < ApplicationRecord
   def last_attendance_date
     attendances.order(attended_on: :desc).pick(:attended_on)
   end
+
+  def upcoming_event
+    event_ids = event_participants.pluck(:event_id)
+    Event.where(id: event_ids).where('start_time > ?', Time.current).order(:start_time).first
+  end
+
+  def attendance_for(event)
+    attendances.find_by(event:)
+  end
 end

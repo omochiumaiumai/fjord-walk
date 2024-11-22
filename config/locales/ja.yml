@@ -1,18 +1,26 @@
 ja:
   notice:
-    user_name_update: 'ユーザー名が更新されました。'
-    user_logout: 'ログアウトしました。'
-    user_name_update: ユーザー名が更新されました。
-  alert:
-    user_not_found: ユーザーが見つかりません。
-  event:
-    notice:
+    user:
+      user_name_update: ユーザー名が更新されました。
+      user_logout: ログアウトしました。
+      user_name_update: ユーザー名が更新されました。
+    event:
       entry_sucsess: イベントへの参加登録が完了しました。
       entry_cancel: イベントへの参加を取り消しました。
       create_sucsess: イベントが作成されました。
       update_sucsess: イベントを更新しました。
       request_deletion: 削除申請を受け付けました。確認次第、削除対応を行います。ありがとうございました。
-    alert:
+    attendance:
+      create_success: 出席登録が完了しました。
+      destroy_success: 出席を取り消しました。
+
+  alert:
+    user:
+      user_not_found: ユーザーが見つかりません。
+    event:
       entry_failure: イベントへの参加登録に失敗しました。
       entry_cancel_failure: イベントへの参加取り消しに失敗しました。
       request_deletion_failure: 削除申請に失敗しました。
+    attendance:
+      create_failure: 出席登録に失敗しました。
+      destroy_failure: 出席取り消しに失敗しました。
