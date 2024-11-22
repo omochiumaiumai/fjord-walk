@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete 'log_out', to: 'sessions#destroy', as:'log_out'
   resources :users, only: [:show, :edit, :update ]
   resources :events, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :talk_themes, only: [:index, :create, :destroy]
     resources :event_participants, only: [:create, :destroy]
     resources :attendances, only: [:create, :destroy]
 
