@@ -10,8 +10,6 @@ class DashboardController < ApplicationController
     @attended_users = attended_users(@upcoming_attendances)
   end
 
-  private
-
   def user_attendances(user)
     user.attendances.pluck(:attended_on)
   end
