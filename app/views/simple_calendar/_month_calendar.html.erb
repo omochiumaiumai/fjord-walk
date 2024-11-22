@@ -1,0 +1,42 @@
+<div class="simple-calendar">
+  <div class="calendar-heading">
+    <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title">
+    <%= start_date.year %></time>
+    <%= t('date.month_names')[start_date.month] %>
+    <%= start_date.strftime('%B') %>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <% day_class = if day.saturday?
+              'bg-blue-400 text-white'
+            elsif day.sunday?
+              'bg-red-400 text-white'
+            else
+              ''
+            end
+          %>
+          <th class="<%= day_class %>"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <% day_classes = calendar.td_classes_for(day).join(' ') %>
+            <% day_classes += ' bg-blue-400 text-white' if day.saturday? %>
+            <% day_classes += ' bg-red-400 text-white' if day.sunday? %>
+
+            <%= content_tag :td, class: day_classes do %>
+              <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

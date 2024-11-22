@@ -38,6 +38,7 @@ gem 'omniauth-discord'
 gem 'omniauth-rails_csrf_protection'
 
 gem 'simple_calendar'
+gem 'rails-i18n'
 gem 'view_component'
 gem 'cocoon'
 
