@@ -2,15 +2,44 @@
 <html>
   <head>
     <title>FjordWalk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+    </script>
+    <![endif]-->
   </head>
 
   <body>
+    <header class="flex justify-between items-center h-30 p-6 border-y-2 bg-black text-white"> 
+      <% if logged_in? %>
+        <h1 class="text-2xl"><%= link_to "FjordWalk", dashboard_path(current_user) %></h1>
+      <% else %>
+        <h1 class="text-2xl"><%= link_to "FjordWalk", root_path %></h1>
+      <% end %>
+      <nav>
+        <button id="button" type="button" class="fixed z-10 top-6 right-6 bg-black/50 p-2 rounded">
+          <i id="bars" class="fa-solid fa-bars fa-2xl transition hover:opacity-40 "></i>
+          <i id="xmark" class="fa-solid fa-xmark fa-2xl transition hover:opacity-40 hidden"></i>
+        </button>
+        <% if logged_in? %>
+          <ul id="menu" class="fixed top-20 right-0 w-1/4 text-2xl h-full bg-black/50 text-white flex flex-col items-center justify-start pt-10 transform translate-x-full transition-transform duration-300">
+            <li class="p-3 transition hover:opacity-40"><%= link_to "MyPage", user_path(current_user.id) %></li>
+            <li class="p-3 transition hover:opacity-40"><%= link_to "Events", events_path %></li>
+            <li class="p-3 transition hover:opacity-40"><%= link_to "Logout", log_out_path, method: :delete, data: { confirm: 'ログアウトしますか？' } %></li>
+          </ul>
+        <% else %>
+          <ul id = "menu" class="z-0 fixed top-20 right-0 w-1/4 text-right bg-black/50 text-2xl h-full flex flex-col items-center">
+            <li class="p-3 transition hover:opacity-40"><%= button_to "Login", '/auth/discord', method: :post, data: { turbo: false } %></li>
+          </ul>
+        <% end %>
+      </nav>
+    </header>
     <% flash.each do |message_type, message| %>
       <div class="flash-message <%= message_type %>"><%= message %></div>
     <% end %>

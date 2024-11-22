@@ -14,4 +14,9 @@ class SessionsController < ApplicationController
   def failure
     redirect_to root_path
   end
+
+  def destroy
+    log_out
+    redirect_to root_path, notice: t('notice.user_logout')
+  end
 end
