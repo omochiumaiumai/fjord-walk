@@ -19,7 +19,7 @@
       - else
         - if upcoming_event.present?
           .event-title
-            = upcoming_event.title
+            = link_to upcoming_event.title, event_path(upcoming_event)
           .event-start_time
             = upcoming_event.start_time
           .attendance
