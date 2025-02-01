@@ -11,7 +11,7 @@ class DashboardController < ApplicationController
   end
 
   def user_attendances(user)
-    user.attendances.pluck(:attended_on)
+    user.attendances.pluck(:attended_on).map(&:to_date)
   end
 
   def attended_events(user)

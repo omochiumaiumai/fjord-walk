@@ -1,15 +1,17 @@
 .page-main
   .user-name.flex.items-center.text-2xl
-    = link_to user_path(@user) do
+    = link_to user_path(@user), class: "flex items-center" do
       img src=@user.avatar_url alt="User Icon" class="w-10 h-10 rounded-full mr-2"
-        = @user.name
+      = @user.name
   .calendar
     = month_calendar do |date|
       = date.day
-      - if @attended_events.any? { |attendance| attendance.event.start_time.to_date == date }
-        | 💮
-  .event-attendance
-    | 次回のイベント
+      - if @attendances.include?(date)
+        .stamp.text-5xl.text-center
+          | 💮
+  .event
+    .event-attendance.text-2xl
+      | 次回のイベント
     .upcoming-event
       - upcoming_event = @user.upcoming_event
       - if @user.event_participants.empty?
@@ -20,24 +22,21 @@
         - if upcoming_event.present?
           .event-title
             = link_to upcoming_event.title, event_path(upcoming_event)
-          .event-start_time
-            = upcoming_event.start_time
+          .event-date
+            | #{@user.upcoming_event_date} #{upcoming_event.start_time.strftime("%H:%M")}~#{upcoming_event.end_time.strftime("%H:%M")}    
           .attendance
             - attendance = current_user.attendance_for(upcoming_event)
             - if attendance
-              | 出席登録済みです
-              = button_to '出席取り消し', event_attendance_path(upcoming_event.id, attendance.id), method: :delete, class: 'btn btn-danger'
+              = button_to '出席取り消し', event_attendance_path(upcoming_event.id, attendance.id), method: :delete, class: 'px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors'
             - else
-              | 出席登録をしてください
-              = button_to '出席登録', event_attendances_path(upcoming_event.id), method: :post, class: 'btn btn-success'    
-        .attemded-users
+              = button_to '出席登録', event_attendances_path(upcoming_event.id), method: :post, class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors'
+        .attended-users
           | 参加者 (#{@attended_users.count}人)
           - if @attended_users.any?
             ul
               - @attended_users.each do |user|
-                li
-                  = link_to user_path(user) do
-                    img src= user.avatar_url
-                    = user.name
+                li.flex.items-center
+                  = link_to user_path(user), class: "flex items-center" do
+                    img src=user.avatar_url  class="w-10 h-10 rounded-full mr-2"
           - else
             | 現在、参加しているユーザーはいません。
