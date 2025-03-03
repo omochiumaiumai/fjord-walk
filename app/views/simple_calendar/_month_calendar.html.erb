@@ -1,4 +1,4 @@
-<div class="simple-calendar">
+<div class="simple-calendar bg-white border-2 border-gray-300 rounded-lg shadow-lg p-6 my-4 mx-4">
   <div class="calendar-heading flex justify-center items-center text-2xl font-bold">
     <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-text">
       <%= start_date.year %>
@@ -6,7 +6,6 @@
     <span class="ml-2 calendar-text"><%= t('date.month_names')[start_date.month] %></span>
     <span class="ml-2 calendar-text"><%= start_date.strftime('%B') %></span>
   </div>
-
 
   <table class="table table-striped">
     <thead>
@@ -30,8 +29,12 @@
         <tr>
           <% week.each do |day| %>
             <% day_classes = calendar.td_classes_for(day).join(' ') %>
-            <% day_classes += ' bg-blue-400 text-white' if day.saturday? %>
-            <% day_classes += ' bg-red-400 text-white' if day.sunday? %>
+            <% day_classes += ' bg-blue-400' if day.saturday? %>
+            <% day_classes += ' bg-red-400' if day.sunday? %>
+            
+            <% if day.month != start_date.month %> 
+              <% day_classes += ' opacity-30' %>
+            <% end %>
 
             <%= content_tag :td, class: day_classes do %>
               <% instance_exec(day, calendar.sorted_events_for(day), &passed_block) %>

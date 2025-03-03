@@ -10,9 +10,9 @@
         .stamp.text-5xl.text-center
           | 💮
   .event
-    .event-attendance.text-2xl
-      | 次回のイベント
-    .upcoming-event
+    .upcoming-event.bg-white.border-2.border-gray-300.p-6.rounded-lg.shadow-lg.text-left.my-4.mx-4
+      .event-title.text-xl.font-bold.mb-4
+        | 次回のイベント
       - upcoming_event = @user.upcoming_event
       - if @user.event_participants.empty?
         | 参加登録しているイベントがありません！
@@ -20,10 +20,10 @@
         = link_to 'イベント一覧' , events_path
       - else
         - if upcoming_event.present?
-          .event-title
+          .event-title.text-xl.font-bold.mb-4
             = link_to upcoming_event.title, event_path(upcoming_event)
-          .event-date
-            | #{@user.upcoming_event_date} #{upcoming_event.start_time.strftime("%H:%M")}~#{upcoming_event.end_time.strftime("%H:%M")}    
+          .event-date.text-lg.text-gray-700.mb-4
+            | #{@user.upcoming_event_date.strftime("%Y年%m月%d日")} #{upcoming_event.start_time.strftime("%H:%M")} ~ #{upcoming_event.end_time.strftime("%H:%M")}
           .attendance
             - attendance = current_user.attendance_for(upcoming_event)
             - if attendance
