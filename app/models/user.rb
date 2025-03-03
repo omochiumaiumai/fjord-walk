@@ -22,14 +22,11 @@ class User < ApplicationRecord
   end
 
   def upcoming_event
-    event_ids = event_participants.pluck(:event_id)
-    Event.where(id: event_ids).select do |event|
-      next_scheduled_with_time = event.next_scheduled_date.to_time.change(
-        hour: event.start_time.hour,
-        min: event.start_time.min
-      )
-      next_scheduled_with_time > Time.zone.now
-    end.min_by(&:next_scheduled_date)
+    event_participants.map(&:event).min
+  end
+
+  def upcoming_event_date
+    upcoming_event.next_scheduled_date
   end
 
   def attendance_for(event)
