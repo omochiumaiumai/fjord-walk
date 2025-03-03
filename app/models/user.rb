@@ -22,7 +22,7 @@ class User < ApplicationRecord
   end
 
   def upcoming_event
-    event_participants.map { |event_participant| event_participant.event }.min
+    event_participants.map(&:event).min
   end
 
   def upcoming_event_date
